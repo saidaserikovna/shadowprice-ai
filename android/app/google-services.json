@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "581685555735",
+    "project_id": "shadowprice-ai-7bb9b",
+    "storage_bucket": "shadowprice-ai-7bb9b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581685555735:android:ad175863719a3bffeca252",
+        "android_client_info": {
+          "package_name": "com.shadowprice.ai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581685555735-r4fngf2cbrs3vpebcf69b3co73avntl2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shadowprice.ai",
+            "certificate_hash": "97c1197403cb5c1eae45d31a549c45567d37467c"
+          }
+        },
+        {
+          "client_id": "581685555735-6qo3q2jmtqq6ev1ca3k3826ffe6pigj2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRucev80-MqOL3LTyX47xPkRjsnGaVEcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "581685555735-6qo3q2jmtqq6ev1ca3k3826ffe6pigj2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "581685555735-6t3obs84a28bg6gjtdm6cn85l39gogik.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.shadowprice.ai"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
