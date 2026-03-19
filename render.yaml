@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: shadowprice-ai-backend
+    plan: free
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /healthz
+    autoDeployTrigger: commit
+    envVars:
+      - key: SHADOWPRICE_BROWSER_ENABLED
+        value: "true"
+      - key: SHADOWPRICE_BROWSER_HEADLESS
+        value: "true"
+      - key: SHADOWPRICE_REQUEST_TIMEOUT
+        value: "12"
+      - key: SHADOWPRICE_RESULTS_PER_MARKET
+        value: "3"
+      - key: SHADOWPRICE_VERIFY_TOP_N
+        value: "2"
+      - key: SHADOWPRICE_MAX_CONCURRENCY
+        value: "6"

@@ -1,9 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="shadowprice_ai"
+        android:label="ShadowPrice AI"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/ic_shadowprice_launcher"
+        android:roundIcon="@drawable/ic_shadowprice_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"

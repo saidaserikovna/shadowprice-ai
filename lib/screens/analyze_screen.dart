@@ -74,32 +74,32 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
     }
 
     final saved = await priceService.addProduct(
-          Product(
-            id: '',
-            userId: userId,
-            name: result.productName,
-            url: result.trackedSourceUrl,
-            currencyCode: result.preferredCurrency,
-            currentPrice: result.trackedCurrentPrice,
-            marketAvg: result.averagePrice,
-            lowestPrice: result.lowestPrice,
-            highestPrice: result.highestPrice,
-            platform: result.trackedPlatform,
-            category: result.cheapestOffer?.marketplace,
-            imageUrl: result.imageUrl,
-            status: result.recommendation,
-            notifyOnDrop: true,
-          ),
-        );
+      Product(
+        id: '',
+        userId: userId,
+        name: result.productName,
+        url: result.trackedSourceUrl,
+        currencyCode: result.preferredCurrency,
+        currentPrice: result.trackedCurrentPrice,
+        marketAvg: result.averagePrice,
+        lowestPrice: result.lowestPrice,
+        highestPrice: result.highestPrice,
+        platform: result.trackedPlatform,
+        category: result.cheapestOffer?.marketplace,
+        imageUrl: result.imageUrl,
+        status: result.recommendation,
+        notifyOnDrop: true,
+      ),
+    );
 
     await priceService.addPriceHistory(
-          PriceHistoryEntry(
-            id: '',
-            productId: saved.id,
-            price: result.trackedCurrentPrice,
-            platform: result.trackedPlatform,
-          ),
-        );
+      PriceHistoryEntry(
+        id: '',
+        productId: saved.id,
+        price: result.trackedCurrentPrice,
+        platform: result.trackedPlatform,
+      ),
+    );
 
     if (!mounted) {
       return;
@@ -177,7 +177,8 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                     controller: _queryCtrl,
                     decoration: const InputDecoration(
                       hintText: 'Product URL or product name',
-                      prefixIcon: Icon(Icons.search, color: ShadowTheme.textMuted, size: 20),
+                      prefixIcon: Icon(Icons.search,
+                          color: ShadowTheme.textMuted, size: 20),
                     ),
                     keyboardType: TextInputType.url,
                     textInputAction: TextInputAction.search,
@@ -289,7 +290,8 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
             ),
             clipBehavior: Clip.antiAlias,
             child: result.imageUrl == null
-                ? const Icon(Icons.inventory_2_outlined, color: ShadowTheme.textMuted, size: 34)
+                ? const Icon(Icons.inventory_2_outlined,
+                    color: ShadowTheme.textMuted, size: 34)
                 : Image.network(
                     result.imageUrl!,
                     fit: BoxFit.cover,
@@ -319,9 +321,11 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                   runSpacing: 8,
                   children: [
                     _pill('${result.offers.length} live offers'),
-                    _pill('${result.marketplacesChecked.length} marketplaces checked'),
+                    _pill(
+                        '${result.marketplacesChecked.length} marketplaces checked'),
                     _pill('Updated ${formatDateTime(result.timestamp)}'),
-                    if (source?.storeName != null) _pill('Source: ${source!.storeName}'),
+                    if (source?.storeName != null)
+                      _pill('Source: ${source!.storeName}'),
                     if (source?.price != null)
                       _pill(
                         'Source price: ${formatMoney(source!.price!, source.currency ?? result.preferredCurrency)}',
@@ -338,7 +342,8 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
 
   Widget _buildRecommendationCard() {
     final result = _result!;
-    final recommendationColor = result.shouldBuyNow ? ShadowTheme.success : ShadowTheme.warning;
+    final recommendationColor =
+        result.shouldBuyNow ? ShadowTheme.success : ShadowTheme.warning;
     final recommendationLabel = result.shouldBuyNow ? 'Buy now' : 'Wait';
 
     return Container(
@@ -354,7 +359,8 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                   color: recommendationColor.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(999),
@@ -411,7 +417,9 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
     final cheapest = result.cheapestOffer;
     final source = result.sourceProduct;
     final sourcePrice = source?.price;
-    final savings = (sourcePrice != null && cheapest != null) ? sourcePrice - cheapest.price : null;
+    final savings = (sourcePrice != null && cheapest != null)
+        ? sourcePrice - cheapest.price
+        : null;
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -439,7 +447,8 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                   'Cheapest',
                   cheapest == null
                       ? 'N/A'
-                      : formatMoney(cheapest.price, cheapest.currency ?? result.preferredCurrency),
+                      : formatMoney(cheapest.price,
+                          cheapest.currency ?? result.preferredCurrency),
                   ShadowTheme.success,
                 ),
               ),
@@ -467,8 +476,12 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
               Expanded(
                 child: _metricTile(
                   'Save vs source',
-                  savings == null ? 'N/A' : formatMoney(savings, result.preferredCurrency),
-                  savings != null && savings > 0 ? ShadowTheme.success : ShadowTheme.textSecondary,
+                  savings == null
+                      ? 'N/A'
+                      : formatMoney(savings, result.preferredCurrency),
+                  savings != null && savings > 0
+                      ? ShadowTheme.success
+                      : ShadowTheme.textSecondary,
                 ),
               ),
             ],
@@ -483,7 +496,8 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
     if (offers.isEmpty) {
       return const SizedBox.shrink();
     }
-    final maxPrice = offers.map((offer) => offer.price).reduce((a, b) => a > b ? a : b);
+    final maxPrice =
+        offers.map((offer) => offer.price).reduce((a, b) => a > b ? a : b);
 
     return Container(
       padding: const EdgeInsets.all(16),
@@ -518,9 +532,12 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                   ),
                 ),
                 titlesData: FlTitlesData(
-                  leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                  topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                  leftTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false)),
+                  rightTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false)),
+                  topTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false)),
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -555,7 +572,9 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                         toY: offers[index].price,
                         width: 24,
                         borderRadius: BorderRadius.circular(8),
-                        color: index == 0 ? ShadowTheme.success : ShadowTheme.accent,
+                        color: index == 0
+                            ? ShadowTheme.success
+                            : ShadowTheme.accent,
                       ),
                     ],
                   ),
@@ -599,10 +618,14 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
               margin: const EdgeInsets.only(bottom: 10),
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: isBest ? ShadowTheme.success.withValues(alpha: 0.06) : ShadowTheme.surfaceLight,
+                color: isBest
+                    ? ShadowTheme.success.withValues(alpha: 0.06)
+                    : ShadowTheme.surfaceLight,
                 borderRadius: BorderRadius.circular(14),
                 border: Border.all(
-                  color: isBest ? ShadowTheme.success.withValues(alpha: 0.25) : ShadowTheme.border,
+                  color: isBest
+                      ? ShadowTheme.success.withValues(alpha: 0.25)
+                      : ShadowTheme.border,
                 ),
               ),
               child: Column(
@@ -622,7 +645,8 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                       ),
                       if (isBest)
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
                             color: ShadowTheme.success.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(999),
@@ -651,9 +675,12 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
                   Row(
                     children: [
                       Text(
-                        formatMoney(offer.price, offer.currency ?? _result!.preferredCurrency),
+                        formatMoney(offer.price,
+                            offer.currency ?? _result!.preferredCurrency),
                         style: TextStyle(
-                          color: isBest ? ShadowTheme.success : ShadowTheme.textPrimary,
+                          color: isBest
+                              ? ShadowTheme.success
+                              : ShadowTheme.textPrimary,
                           fontWeight: FontWeight.w800,
                           fontSize: 16,
                         ),
@@ -711,7 +738,8 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.info_outline, size: 16, color: ShadowTheme.textMuted),
+                  const Icon(Icons.info_outline,
+                      size: 16, color: ShadowTheme.textMuted),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -803,7 +831,7 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
           ),
           SizedBox(height: 8),
           Text(
-            'Use direct product pages only: Kaspi /shop/p/, Amazon /dp/, eBay /itm/, AliExpress /item/, Wildberries detail.aspx, Ozon /product/. Search or category pages are slower and often fail.',
+            'Use direct product pages only: Kaspi /shop/p/, Amazon /dp/, eBay /itm/, AliExpress /item/, Wildberries detail.aspx, Ozon /product/. If full comparison is unavailable, ShadowPrice will still try to read the live source-page price from the pasted URL.',
             style: TextStyle(
               color: ShadowTheme.textSecondary,
               fontSize: 12,
@@ -867,6 +895,8 @@ class _AnalyzeScreenState extends State<AnalyzeScreen> {
 
   bool get _canTrackResult {
     final result = _result;
-    return result != null && result.trackedCurrentPrice > 0 && result.trackedSourceUrl != null;
+    return result != null &&
+        result.trackedCurrentPrice > 0 &&
+        result.trackedSourceUrl != null;
   }
 }

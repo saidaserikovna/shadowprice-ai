@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../core/theme.dart';
 import '../services/auth_service.dart';
+import '../widgets/brand_logo.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -35,7 +36,9 @@ class _AuthScreenState extends State<AuthScreen> {
         );
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('A verification email has been sent. Please check your inbox.')),
+            const SnackBar(
+                content: Text(
+                    'A verification email has been sent. Please check your inbox.')),
           );
         }
       }
@@ -85,20 +88,7 @@ class _AuthScreenState extends State<AuthScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Logo
-                  Container(
-                    width: 72,
-                    height: 72,
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [ShadowTheme.accent, Color(0xFF06B6D4)],
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Center(
-                      child: Text('S', style: TextStyle(fontSize: 36, fontWeight: FontWeight.w900, color: Colors.white)),
-                    ),
-                  ),
+                  const BrandLogo(size: 72),
                   const SizedBox(height: 24),
                   Text(
                     'ShadowPrice AI',
@@ -106,8 +96,11 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    _isLogin ? 'Sign in to your account' : 'Create a new account',
-                    style: const TextStyle(color: ShadowTheme.textSecondary, fontSize: 14),
+                    _isLogin
+                        ? 'Sign in to your account'
+                        : 'Create a new account',
+                    style: const TextStyle(
+                        color: ShadowTheme.textSecondary, fontSize: 14),
                   ),
                   const SizedBox(height: 32),
 
@@ -116,8 +109,14 @@ class _AuthScreenState extends State<AuthScreen> {
                     width: double.infinity,
                     child: OutlinedButton.icon(
                       onPressed: _loading ? null : _handleGoogleAuth,
-                      icon: const Text('G', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: ShadowTheme.accent)),
-                      label: Text(_isLogin ? 'Continue with Google' : 'Sign up with Google'),
+                      icon: const Text('G',
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: ShadowTheme.accent)),
+                      label: Text(_isLogin
+                          ? 'Continue with Google'
+                          : 'Sign up with Google'),
                     ),
                   ),
 
@@ -127,7 +126,9 @@ class _AuthScreenState extends State<AuthScreen> {
                       Expanded(child: Divider(color: ShadowTheme.border)),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 12),
-                        child: Text('or', style: TextStyle(color: ShadowTheme.textMuted, fontSize: 12)),
+                        child: Text('or',
+                            style: TextStyle(
+                                color: ShadowTheme.textMuted, fontSize: 12)),
                       ),
                       Expanded(child: Divider(color: ShadowTheme.border)),
                     ],
@@ -146,9 +147,13 @@ class _AuthScreenState extends State<AuthScreen> {
                               controller: _nameCtrl,
                               decoration: const InputDecoration(
                                 hintText: 'Name',
-                                prefixIcon: Icon(Icons.person_outline, color: ShadowTheme.textMuted, size: 20),
+                                prefixIcon: Icon(Icons.person_outline,
+                                    color: ShadowTheme.textMuted, size: 20),
                               ),
-                              validator: (v) => !_isLogin && (v == null || v.isEmpty) ? 'Enter your name' : null,
+                              validator: (v) =>
+                                  !_isLogin && (v == null || v.isEmpty)
+                                      ? 'Enter your name'
+                                      : null,
                             ),
                           ),
                         TextFormField(
@@ -156,10 +161,13 @@ class _AuthScreenState extends State<AuthScreen> {
                           keyboardType: TextInputType.emailAddress,
                           decoration: const InputDecoration(
                             hintText: 'Email',
-                            prefixIcon: Icon(Icons.email_outlined, color: ShadowTheme.textMuted, size: 20),
+                            prefixIcon: Icon(Icons.email_outlined,
+                                color: ShadowTheme.textMuted, size: 20),
                           ),
                           validator: (v) {
-                            if (v == null || v.isEmpty) return 'Enter your email';
+                            if (v == null || v.isEmpty) {
+                              return 'Enter your email';
+                            }
                             if (!v.contains('@')) return 'Enter a valid email';
                             return null;
                           },
@@ -170,19 +178,27 @@ class _AuthScreenState extends State<AuthScreen> {
                           obscureText: _obscure,
                           decoration: InputDecoration(
                             hintText: 'Password',
-                            prefixIcon: const Icon(Icons.lock_outline, color: ShadowTheme.textMuted, size: 20),
+                            prefixIcon: const Icon(Icons.lock_outline,
+                                color: ShadowTheme.textMuted, size: 20),
                             suffixIcon: IconButton(
                               icon: Icon(
-                                _obscure ? Icons.visibility_off : Icons.visibility,
+                                _obscure
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
                                 color: ShadowTheme.textMuted,
                                 size: 20,
                               ),
-                              onPressed: () => setState(() => _obscure = !_obscure),
+                              onPressed: () =>
+                                  setState(() => _obscure = !_obscure),
                             ),
                           ),
                           validator: (v) {
-                            if (v == null || v.isEmpty) return 'Enter your password';
-                            if (v.length < 6) return 'Use at least 6 characters';
+                            if (v == null || v.isEmpty) {
+                              return 'Enter your password';
+                            }
+                            if (v.length < 6) {
+                              return 'Use at least 6 characters';
+                            }
                             return null;
                           },
                         ),
@@ -193,7 +209,11 @@ class _AuthScreenState extends State<AuthScreen> {
                           child: ElevatedButton(
                             onPressed: _loading ? null : _handleEmailAuth,
                             child: _loading
-                                ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                                ? const SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(
+                                        strokeWidth: 2, color: Colors.white))
                                 : Text(_isLogin ? 'Sign in' : 'Create account'),
                           ),
                         ),
@@ -205,7 +225,9 @@ class _AuthScreenState extends State<AuthScreen> {
                   TextButton(
                     onPressed: () => setState(() => _isLogin = !_isLogin),
                     child: Text(
-                      _isLogin ? 'No account yet? Create one' : 'Already have an account? Sign in',
+                      _isLogin
+                          ? 'No account yet? Create one'
+                          : 'Already have an account? Sign in',
                       style: const TextStyle(fontSize: 13),
                     ),
                   ),

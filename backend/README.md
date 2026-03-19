@@ -25,6 +25,17 @@ uvicorn app.main:app --reload
 
 By default the Flutter app expects the backend on `http://10.0.2.2:8000` for Android emulators.
 
+## Online Deploy
+
+This repo is prepared for a Docker-based Render deploy:
+
+1. Push this project to GitHub.
+2. Sign in to Render and create a new Blueprint or Web Service from the repo.
+3. Use the root-level [`render.yaml`](../render.yaml) file.
+4. After Render gives you a public URL like `https://shadowprice-ai-backend.onrender.com`, open the mobile app and set that URL in `Settings -> Backend Connection`.
+
+The backend exposes a health check at `/healthz`.
+
 ## Environment
 
 - `OPENAI_API_KEY`: enables the AI chat endpoint

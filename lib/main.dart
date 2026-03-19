@@ -7,6 +7,7 @@ import 'services/price_service.dart';
 import 'services/shadowprice_api_service.dart';
 import 'screens/auth_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/launch_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +30,7 @@ class ShadowPriceApp extends StatelessWidget {
         title: 'ShadowPrice AI',
         debugShowCheckedModeBanner: false,
         theme: ShadowTheme.darkTheme,
-        home: const AuthGate(),
+        home: const LaunchScreen(child: AuthGate()),
       ),
     );
   }
